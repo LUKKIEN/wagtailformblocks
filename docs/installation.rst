@@ -32,13 +32,13 @@ You can either clone the public repository:
 
 .. code-block:: console
 
-    $ git clone git://github.com/tleguijt/wagtailformblocks
+    $ git clone git://github.com/LUKKIEN/wagtailformblocks
 
 Or download the `tarball`_:
 
 .. code-block:: console
 
-    $ curl  -OL https://github.com/tleguijt/wagtailformblocks/tarball/master
+    $ curl  -OL https://github.com/LUKKIEN/wagtailformblocks/tarball/master
 
 Once you have a copy of the source, you can install it with:
 
@@ -81,5 +81,5 @@ To use this example add the following line to you HTML template:
 
 Make sure jQuery is loaded as well.
 
-.. _Github repo: https://github.com/tleguijt/wagtailformblocks
-.. _tarball: https://github.com/tleguijt/wagtailformblocks/tarball/master
+.. _Github repo: https://github.com/LUKKIEN/wagtailformblocks
+.. _tarball: https://github.com/LUKKIEN/wagtailformblocks/tarball/master

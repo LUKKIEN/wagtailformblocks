@@ -35,7 +35,7 @@ setup(
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
     author_email='info@leguijtict.nl',
-    url='https://github.com/tleguijt/wagtailformblocks',
+    url='https://github.com/LUKKIEN/wagtailformblocks',
     packages=[
         'wagtailformblocks',
     ],
