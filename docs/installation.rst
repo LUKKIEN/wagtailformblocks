@@ -70,5 +70,16 @@ Add ``wagtailformblocks.url`` to your url config to enable the form processing v
         ...
     ]
 
+For ``wagtailformblocks`` to work correctly the form submit actions has to be processed
+by a javascript. A simple implementation is provided as a static file.
+
+To use this example add the following line to you HTML template:
+
+.. code-block:: html
+
+    <script src="{% static 'wagtailformblocks/js/formhandler.js' %}"></script>
+
+Make sure jQuery is loaded as well.
+
 .. _Github repo: https://github.com/tleguijt/wagtailformblocks
 .. _tarball: https://github.com/tleguijt/wagtailformblocks/tarball/master
