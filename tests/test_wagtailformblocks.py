@@ -8,8 +8,8 @@ from __future__ import unicode_literals
 
 import json
 
+from django.core.urlresolvers import reverse
 from django.test import TestCase
-from django.urls import reverse
 
 from wagtailformblocks.models import (BaseForm, EmailForm, FormField,
                                       FormSubmission)
@@ -42,6 +42,16 @@ def make_formfields(form):
     )
 
 
+def get_json(response):
+    if hasattr(response, 'json'):  # Django >= 1.9
+        return response.json()
+    try:
+        return json.loads(response.content)
+    except TypeError:
+        # Happens when response.content is of type bytes (Python 3)
+        return json.loads(response.content.decode())
+
+
 class TestViews(TestCase):
     def setUp(self):
         self.baseform = BaseForm.objects.create()
@@ -57,8 +67,7 @@ class TestViews(TestCase):
         data = {}
         resp = self.client.post(url, data)
         self.assertEqual(resp.status_code, 200)
-
-        json_resp = json.loads(resp.content)
+        json_resp = get_json(resp)
         self.assertEqual(json_resp['message'],
                          'Thank you, the form has been submitted.')
 
@@ -69,7 +78,7 @@ class TestViews(TestCase):
         resp = self.client.post(url, data)
         self.assertEqual(resp.status_code, 400)
 
-        json_resp = json.loads(resp.content)
+        json_resp = get_json(resp)
         self.assertEqual(json_resp['message'],
                          'There was an error processing the form')
 
