@@ -1,8 +1,9 @@
 from django.utils.translation import ugettext_lazy as _
 
-from wagtail.contrib.modeladmin.options import ModelAdmin, ModelAdminGroup, modeladmin_register
+from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
+                                                modeladmin_register)
 
-from .models import BaseForm
+from .models import BaseForm, FormSubmission
 
 
 def _get_valid_subclasses(cls):
@@ -32,6 +33,15 @@ for cls in all_classes:
     }
     admin_class = type(admin_name, (ModelAdmin, ), admin_defs)
     form_admins.append(admin_class)
+
+
+class SubmissionAdmin(ModelAdmin):
+    model = FormSubmission
+    menu_icon = 'icon icon-table'
+    list_display = ('form_data', 'form', 'submit_time')
+    list_filter = ('form', )
+
+form_admins.append(SubmissionAdmin)
 
 
 @modeladmin_register
