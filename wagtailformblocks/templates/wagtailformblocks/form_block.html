@@ -1,0 +1,22 @@
+{% load static %}
+{% comment %}
+###################################################################################
+#
+# This is an example template to render the form block.
+# Feel free to use as is but it you have to provide your own javascript handling of
+# the form submit action.
+#
+# You can use the provided formhandler.js script which required jQuery to run
+# correctly or use this simple script as a reference to write your own in your
+# prefered framework
+#
+###################################################################################
+<!-- Example -->
+<script src="{% static 'wagtailformblocks/js/formhandler.js' %}"></script>
+{% endcomment %}
+
+<form action="{{ action_url }}" id="wagtailformblock_{{ form_id }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit">
+</form>
