@@ -58,5 +58,8 @@ matrix:
   - env: TOXENV=py27-dj18-wt14
     python: 2.7
 
+install:
+  - pip install -U tox
+
 script:
   tox
