@@ -10,6 +10,9 @@ Wagtail Form Blocks
         :target: https://wagtailformblocks.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
+.. image:: https://travis-ci.org/LUKKIEN/wagtailformblocks.svg?branch=master
+    :target: https://travis-ci.org/LUKKIEN/wagtailformblocks
+
 A Wagtail module that provides content blocks to display and process user defined forms
 
 
