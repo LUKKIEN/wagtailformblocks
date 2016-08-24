@@ -21,6 +21,11 @@ test_require = [
     'flake8>=2.2.0',
     'isort>=4.2.0',
     'tox>=2.3.1',
+    'cryptography==1.4',
+    'PyYAML==3.11',
+    'bumpversion==0.5.3',
+    'wheel==0.29.0',
+    'watchdog==0.8.3',
 ]
 
 docs_require = [

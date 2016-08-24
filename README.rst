@@ -14,7 +14,7 @@ A Wagtail module that provides content blocks to display and process user define
 
 
 * Free software: MIT license
-* Documentation: https://wagtail-formblocks.readthedocs.io.
+* Documentation: https://wagtailformblocks.readthedocs.io.
 
 
 Features
