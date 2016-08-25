@@ -51,7 +51,7 @@ clean-test: ## remove test and coverage artifacts
 	rm -fr htmlcov/
 
 lint: ## check style with flake8
-	flake8 wagtailformblocks tests
+	flake8 --format=pylint `find wagtailformblocks -name '*.py' -type f -not -path '*/migrations/*'`
 
 test: ## run tests quickly with the default Python
 
