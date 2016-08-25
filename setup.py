@@ -12,7 +12,6 @@ with open('CHANGELOG.rst') as changelog_file:
 install_requires = [
     'wagtail>=1.0',
     'django-model-utils>=2.5.2',
-    'djangorestframework>=3.0'
 ]
 
 test_require = [
@@ -36,7 +35,7 @@ docs_require = [
 setup(
     name='wagtailformblocks',
     version='0.1.0',
-    description="A Wagtail module that provides content blocks to display and process user defined forms",
+    description="A Wagtail module that provides content blocks to display and process user defined forms", # NOQA
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
     author_email='info@leguijtict.nl',
