@@ -10,4 +10,5 @@ Development Lead
 Contributors
 ------------
 
+* Janneke Janssen
 * Rubén Colina
