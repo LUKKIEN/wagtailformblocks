@@ -49,13 +49,14 @@ Once you have a copy of the source, you can install it with:
 Configure Django
 ----------------
 
-Add ``wagtailformblocks`` and ``wagtail.wagtailforms`` to your ``INSTALLED_APPS`` in settings:
+Add ``wagtailformblocks``, ``wagtail.wagtailforms`` and ``wagtail.contrib.modeladmin`` to your ``INSTALLED_APPS`` in settings:
 
 .. code-block:: python
 
     INSTALLED_APPS += [
         'wagtailformblocks',
         'wagtail.wagtailforms',
+        'wagtail.contrib.modeladmin'
     ]
 
 Add ``wagtailformblocks.url`` to your url config to enable the form processing views:
