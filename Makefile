@@ -80,7 +80,7 @@ servedocs: docs ## compile the docs watching for changes
 	watchmedo shell-command -p '*.rst' -c '$(MAKE) -C docs html' -R -D .
 
 release: dist
-	twine upload dist/*
+	twine upload -r lukkien dist/*
 
 dist: clean ## builds source and wheel package
 	python setup.py sdist bdist_wheel
