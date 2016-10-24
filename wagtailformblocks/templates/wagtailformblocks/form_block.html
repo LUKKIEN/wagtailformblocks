@@ -16,7 +16,7 @@
 {% endcomment %}
 
 <form action="{{ action_url }}" id="wagtailformblock_{{ form_id }}">
-    {% csrf_token %}
+    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
     {{ form.as_p }}
     <input type="submit">
 </form>

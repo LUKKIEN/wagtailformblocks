@@ -2,8 +2,11 @@ from __future__ import absolute_import, unicode_literals
 
 from django import forms
 from django.core.urlresolvers import reverse
+from django.middleware.csrf import get_token
 
 from wagtail.wagtailcore import blocks
+
+from request_provider.signals import get_request
 
 from .models import BaseForm
 
@@ -43,8 +46,9 @@ class WagtailFormBlock(blocks.StructBlock):
     def get_context(self, value):
         context = super(WagtailFormBlock, self).get_context(value)
         form = value['form']
-
+        request = get_request()
         context['form'] = form.get_form()
         context['form_id'] = form.id
         context['action_url'] = self.get_action_url(form)
+        context['csrf_token'] = get_token(request)
         return context
