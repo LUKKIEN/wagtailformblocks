@@ -12,6 +12,7 @@ with open('CHANGELOG.rst') as changelog_file:
 install_requires = [
     'wagtail>=1.0',
     'django-model-utils>=2.5.2',
+    'django-request-provider==1.0.2',
 ]
 
 test_require = [

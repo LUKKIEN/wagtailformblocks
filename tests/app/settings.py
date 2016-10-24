@@ -59,6 +59,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
     'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'request_provider.middleware.RequestProvider',
 ]
 
 TEMPLATES = [
