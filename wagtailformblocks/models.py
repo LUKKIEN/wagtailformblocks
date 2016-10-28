@@ -7,17 +7,16 @@ from django.db import models
 from django.utils import six
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from model_utils.managers import InheritanceManager
-
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, FieldRowPanel,
-                                                InlinePanel, MultiFieldPanel)
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel)
 from wagtail.wagtailadmin.utils import send_mail
-from wagtail.wagtailforms.forms import FormBuilder
 from wagtail.wagtailforms.models import AbstractFormField
+
+from .forms import FormBuilder
+from .utils.conf import recaptcha_enabled
 
 
 @python_2_unicode_compatible
@@ -26,9 +25,8 @@ class FormSubmission(models.Model):
 
     form_data = models.TextField()
     form = models.ForeignKey('BaseForm', on_delete=models.CASCADE)
-
-    submit_time = models.DateTimeField(verbose_name=_('submit time'),
-                                       auto_now_add=True)
+    submit_time = models.DateTimeField(
+        verbose_name=_('submit time'), auto_now_add=True)
 
     def get_data(self):
         return json.loads(self.form_data)
@@ -51,6 +49,8 @@ class BaseForm(ClusterableModel):
         default=False,
         help_text=_('Store all form submissions in the database. This has to comply with local privacy laws.') # NOQA
     )
+    add_recaptcha = models.BooleanField(
+        default=False, help_text=_("Add a reCapcha field to the form."))
     success_message = models.CharField(
         blank=True,
         max_length=255,
@@ -68,7 +68,8 @@ class BaseForm(ClusterableModel):
         return self.name
 
     def get_form_class(self):
-        fb = FormBuilder(self.form_fields.all())
+        fb = FormBuilder(
+            self.form_fields.all(), add_recaptcha=self.add_recaptcha)
         return fb.get_form_class()
 
     def get_form_parameters(self):
@@ -88,6 +89,9 @@ class BaseForm(ClusterableModel):
                 form=self)
 
 
+if recaptcha_enabled():
+    BaseForm.panels.insert(2, FieldPanel('add_recaptcha'))
+
 class EmailForm(BaseForm):
     """
     A Form Page that sends email. Pages implementing a form to be send
@@ -98,12 +102,10 @@ class EmailForm(BaseForm):
         verbose_name=_('to address'), max_length=255, blank=True,
         help_text=_("Optional - form submissions will be emailed to these addresses. Separate multiple addresses by comma.") # NOQA
     )
-    from_address = models.CharField(verbose_name=_('from address'),
-                                    max_length=255,
-                                    blank=True)
-    subject = models.CharField(verbose_name=_('subject'),
-                               max_length=255,
-                               blank=True)
+    from_address = models.CharField(
+        verbose_name=_('from address'), max_length=255, blank=True)
+    subject = models.CharField(
+        verbose_name=_('subject'), max_length=255, blank=True)
 
     class Meta:
         verbose_name = _('Email form')
@@ -126,6 +128,13 @@ class EmailForm(BaseForm):
 
     def send_form_mail(self, form):
         addresses = [x.strip() for x in self.to_address.split(',')]
-        content = '\n'.join([x[1].label + ': ' + six.text_type(
-            form.data.get(x[0])) for x in form.fields.items()])
-        send_mail(self.subject, content, addresses, self.from_address,)
+        content = []
+        for name, field in form.fields.items():
+            data = form.cleaned_data.get(name)
+            if name == 'recaptcha' or not data:
+                continue
+            content.append(
+                field.label + ': ' + six.text_type(data))
+
+        send_mail(
+            self.subject, '\n'.join(content), addresses, self.from_address)
