@@ -1,17 +1,15 @@
+from captcha.fields import ReCaptchaField
 from django.conf import settings
+from django.utils.functional import lazy
 from wagtail.wagtailforms.forms import FormBuilder as OrigFormBuilder
 
 from wagtailformblocks.utils.conf import get_formblocks_setting
 
-try:
-    from captcha.fields import ReCaptchaField
-    RECAPTCHA_ENABLED = (
-        'captcha' in settings.INSTALLED_APPS and
-        getattr(settings, 'RECAPTCHA_PUBLIC_KEY', False) and
-        getattr(settings, 'RECAPTCHA_PRIVATE_KEY', False)
-    )
-except ImportError:
-    RECAPTCHA_ENABLED = False
+RECAPTCHA_ENABLED = lazy(
+    'captcha' in settings.INSTALLED_APPS and
+    getattr(settings, 'RECAPTCHA_PUBLIC_KEY', False) and
+    getattr(settings, 'RECAPTCHA_PRIVATE_KEY', False)
+)
 
 
 class FormBuilder(OrigFormBuilder):

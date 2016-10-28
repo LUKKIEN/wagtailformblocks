@@ -11,5 +11,5 @@ DEFAULTS = {
 
 
 def get_formblocks_setting(name):
-    return getattr(settings, 'WAGTAIL_FORMBLOCKS_'.format(name),
-                   DEFAULTS[name])
+    return getattr(
+        settings, 'WAGTAIL_FORMBLOCKS_'.format(name), DEFAULTS[name])
