@@ -137,4 +137,4 @@ class EmailForm(BaseForm):
                 field.label + ': ' + six.text_type(data))
 
         send_mail(
-            self.subject, '\n '.join(content), addresses, self.from_address)
+            self.subject, '\n'.join(content), addresses, self.from_address)
