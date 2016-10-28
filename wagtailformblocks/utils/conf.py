@@ -13,3 +13,11 @@ DEFAULTS = {
 def get_formblocks_setting(name):
     return getattr(
         settings, 'WAGTAIL_FORMBLOCKS_'.format(name), DEFAULTS[name])
+
+
+def recaptcha_enabled():
+    return (
+        'captcha' in settings.INSTALLED_APPS and
+        getattr(settings, 'RECAPTCHA_PUBLIC_KEY', False) and
+        getattr(settings, 'RECAPTCHA_PRIVATE_KEY', False)
+    )

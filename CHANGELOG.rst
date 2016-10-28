@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.1.3 (xxxx.xx.xx)
+------------------
++ Add `django-recaptcha` field when available.
+
 0.1.2 (2016.10.07)
 ------------------
 + Added CSRF support in the example jQuery form handler

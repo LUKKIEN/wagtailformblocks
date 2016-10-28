@@ -2,7 +2,8 @@ from captcha.fields import ReCaptchaField
 from django.conf import settings
 from wagtail.wagtailforms.forms import FormBuilder as OrigFormBuilder
 
-from wagtailformblocks.utils.conf import get_formblocks_setting
+from wagtailformblocks.utils.conf import (
+    get_formblocks_setting, recaptcha_enabled)
 
 
 class FormBuilder(OrigFormBuilder):
@@ -13,12 +14,7 @@ class FormBuilder(OrigFormBuilder):
 
     @property
     def recaptcha_enabled(self):
-        return (
-            self.add_recaptcha and
-            'captcha' in settings.INSTALLED_APPS and
-            getattr(settings, 'RECAPTCHA_PUBLIC_KEY', False) and
-            getattr(settings, 'RECAPTCHA_PRIVATE_KEY', False)
-        )
+        return self.add_recaptcha and recaptcha_enabled()
 
     @property
     def formfields(self):

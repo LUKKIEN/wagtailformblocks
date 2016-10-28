@@ -16,6 +16,7 @@ from wagtail.wagtailadmin.utils import send_mail
 from wagtail.wagtailforms.models import AbstractFormField
 
 from .forms import FormBuilder
+from .utils.conf import recaptcha_enabled
 
 
 @python_2_unicode_compatible
@@ -58,7 +59,6 @@ class BaseForm(ClusterableModel):
     panels = [
         FieldPanel('name',),
         FieldPanel('store_submission',),
-        FieldPanel('add_recaptcha'),
         InlinePanel('form_fields', label="Form fields"),
     ]
 
@@ -88,6 +88,9 @@ class BaseForm(ClusterableModel):
                 form_data=json.dumps(form.cleaned_data, cls=DjangoJSONEncoder),
                 form=self)
 
+
+if recaptcha_enabled():
+    BaseForm.panels.insert(2, FieldPanel('add_recaptcha'))
 
 class EmailForm(BaseForm):
     """
