@@ -7,17 +7,15 @@ from django.db import models
 from django.utils import six
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
-
 from model_utils.managers import InheritanceManager
-
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-
-from wagtail.wagtailadmin.edit_handlers import (FieldPanel, FieldRowPanel,
-                                                InlinePanel, MultiFieldPanel)
+from wagtail.wagtailadmin.edit_handlers import (
+    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel)
 from wagtail.wagtailadmin.utils import send_mail
-from wagtail.wagtailforms.forms import FormBuilder
 from wagtail.wagtailforms.models import AbstractFormField
+
+from .forms import FormBuilder
 
 
 @python_2_unicode_compatible
@@ -51,6 +49,8 @@ class BaseForm(ClusterableModel):
         default=False,
         help_text=_('Store all form submissions in the database. This has to comply with local privacy laws.') # NOQA
     )
+    add_recaptcha = models.BooleanField(
+        default=False, help_text=_("Add a reCapcha field to the form."))
     success_message = models.CharField(
         blank=True,
         max_length=255,
@@ -59,6 +59,7 @@ class BaseForm(ClusterableModel):
     panels = [
         FieldPanel('name',),
         FieldPanel('store_submission',),
+        FieldPanel('add_recaptcha'),
         InlinePanel('form_fields', label="Form fields"),
     ]
 
@@ -68,7 +69,8 @@ class BaseForm(ClusterableModel):
         return self.name
 
     def get_form_class(self):
-        fb = FormBuilder(self.form_fields.all())
+        fb = FormBuilder(
+            self.form_fields.all(), add_recaptcha=self.add_recaptcha)
         return fb.get_form_class()
 
     def get_form_parameters(self):
