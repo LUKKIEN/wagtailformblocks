@@ -12,3 +12,4 @@ Contributors
 
 * Janneke Janssen
 * Rubén Colina
+* Mike Dingjan

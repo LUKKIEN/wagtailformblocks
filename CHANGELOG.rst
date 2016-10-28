@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.1.3 (xxxx.xx.xx)
+0.1.3 (2016.10.28)
 ------------------
 + Add `django-recaptcha` field when available.
 
