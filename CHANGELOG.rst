@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.1.4 (xxxx.xx.xx)
+------------------
++ Fixed form selector in formhandler.js (Marco Westerhof)
+
 0.1.3 (2016.10.28)
 ------------------
 + Add `django-recaptcha` field when available.
