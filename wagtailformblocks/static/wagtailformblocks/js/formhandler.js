@@ -35,7 +35,7 @@ function showError(form, message) {
     form.prepend('<p class=\'error\'>' + message + '</p>');
 }
 
-$(document).on('submit form id[^=wagtailformblock_]', function(e) {
+$(document).on('submit', "form[id^='wagtailformblock_']", function(e) {
     // Prevent the form from submitting on it's own
     e.preventDefault();
 
