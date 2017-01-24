@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.1.4 (xxxx.xx.xx)
+0.1.4 (2016.01.24)
 ------------------
 + Fixed form selector in formhandler.js (Marco Westerhof)
 
