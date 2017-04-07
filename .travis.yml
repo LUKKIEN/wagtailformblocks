@@ -53,7 +53,8 @@ matrix:
     python: 2.7
 
 install:
-  - pip install -U tox
-
+  - pip install -U codecov tox
 script:
-  tox
+  - tox
+after_success:
+  - codecov
