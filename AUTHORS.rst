@@ -12,4 +12,5 @@ Contributors
 
 * Janneke Janssen
 * Rubén Colina
+* Mike Dingjan
 * Oktay Altay

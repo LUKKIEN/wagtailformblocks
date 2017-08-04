@@ -13,6 +13,9 @@ Wagtail Form Blocks
 .. image:: https://travis-ci.org/LUKKIEN/wagtailformblocks.svg?branch=master
     :target: https://travis-ci.org/LUKKIEN/wagtailformblocks
 
+.. image:: https://codecov.io/gh/LUKKIEN/wagtailformblocks/branch/master/graph/badge.svg
+    :target: https://codecov.io/gh/LUKKIEN/wagtailformblocks
+
 A Wagtail module that provides content blocks to display and process user defined forms
 
 
