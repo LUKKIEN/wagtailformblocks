@@ -17,7 +17,6 @@ INSTALLED_APPS = [
 
     'taggit',
     'modelcluster',
-    'captcha',
 
     'wagtail.wagtailcore',
     'wagtail.wagtailadmin',

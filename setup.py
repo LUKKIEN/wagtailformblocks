@@ -16,7 +16,7 @@ install_requires = [
 ]
 
 test_require = [
-    # For coverage and PEP8 lintin    'coverage>=3.7.0',
+    # For coverage and PEP8 linting
     'flake8>=2.2.0',
     'isort>=4.2.0',
     'tox>=2.3.1',

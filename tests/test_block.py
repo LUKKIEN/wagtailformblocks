@@ -18,7 +18,7 @@ def test_wagtail_form_block_without_parent_context():
     form = BaseFormFactory()
     block = WagtailFormBlock()
     ctx = block.get_context({'form': form}, parent_context=None)
-    assert ctx['value']['form'].pk
+    assert ctx['value']['form'].pk == form.pk
 
 
 @pytest.mark.django_db
