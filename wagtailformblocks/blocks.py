@@ -40,8 +40,12 @@ class WagtailFormBlock(blocks.StructBlock):
     def get_action_url(self, form):
         return reverse('wagtailformblocks_process', kwargs={'pk': form.id})
 
-    def get_context(self, value):
-        context = super(WagtailFormBlock, self).get_context(value)
+    def get_context(self, value, parent_context=None):
+        if not parent_context:
+            context = super(WagtailFormBlock, self).get_context(value)
+        else:
+            context = super(WagtailFormBlock, self).get_context(value, parent_context)
+
         form = value['form']
 
         context['form'] = form.get_form()

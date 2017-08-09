@@ -8,11 +8,11 @@ from __future__ import unicode_literals
 
 import json
 
+import pytest
 from django.core.urlresolvers import reverse
-from django.test import TestCase
 
-from wagtailformblocks.models import (BaseForm, EmailForm, FormField,
-                                      FormSubmission)
+from tests.factory.form import BaseFormFactory, EmailFormFactory
+from wagtailformblocks.models import FormField, FormSubmission
 
 
 def make_formfields(form):
@@ -52,56 +52,57 @@ def get_json(response):
         return json.loads(response.content.decode())
 
 
-class TestViews(TestCase):
-    def setUp(self):
-        self.baseform = BaseForm.objects.create()
-        self.emailform = EmailForm.objects.create()
-        make_formfields(self.emailform)
+@pytest.mark.django_db
+def test_process(client):
+    baseform = BaseFormFactory()
+    emailform = EmailFormFactory()
+    make_formfields(emailform)
+    url = reverse('wagtailformblocks_process',
+                  kwargs={'pk': baseform.id})
+    data = {}
+    resp = client.post(url, data)
+    assert resp.status_code == 200
+    json_resp = get_json(resp)
+    assert json_resp['message'] == 'Thank you, the form has been submitted.'
 
-    def tearDown(self):
-        pass
 
-    def test_process(self):
-        url = reverse('wagtailformblocks_process',
-                      kwargs={'pk': self.baseform.id})
-        data = {}
-        resp = self.client.post(url, data)
-        self.assertEqual(resp.status_code, 200)
-        json_resp = get_json(resp)
-        self.assertEqual(json_resp['message'],
-                         'Thank you, the form has been submitted.')
+@pytest.mark.django_db
+def test_process_form_validation(client):
+    emailform = EmailFormFactory()
+    make_formfields(emailform)
+    url = reverse('wagtailformblocks_process',
+                  kwargs={'pk': emailform.id})
+    data = {}
+    resp = client.post(url, data)
+    assert resp.status_code == 400
 
-    def test_process_form_validation(self):
-        url = reverse('wagtailformblocks_process',
-                      kwargs={'pk': self.emailform.id})
-        data = {}
-        resp = self.client.post(url, data)
-        self.assertEqual(resp.status_code, 400)
+    json_resp = get_json(resp)
+    assert json_resp['message'] == 'There was an error processing the form'
 
-        json_resp = get_json(resp)
-        self.assertEqual(json_resp['message'],
-                         'There was an error processing the form')
+    data = {
+        'your-email': 'john@doe.com',
+        'your-message': 'This is a test message'
+    }
+    resp = client.post(url, data)
+    assert resp.status_code == 200
 
-        data = {
-            'your-email': 'john@doe.com',
-            'your-message': 'This is a test message'
-        }
-        resp = self.client.post(url, data)
-        self.assertEqual(resp.status_code, 200)
 
-    def test_process_form_store_submission(self):
-        url = reverse('wagtailformblocks_process',
-                      kwargs={'pk': self.emailform.id})
-        data = {
-            'your-email': 'john@doe.com',
-            'your-message': 'This is a test message'
-        }
-        resp = self.client.post(url, data)
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(FormSubmission.objects.count(), 0)
+@pytest.mark.django_db
+def test_process_form_store_submission(client):
+    emailform = EmailFormFactory()
+    make_formfields(emailform)
+    url = reverse('wagtailformblocks_process',
+                  kwargs={'pk': emailform.id})
+    data = {
+        'your-email': 'john@doe.com',
+        'your-message': 'This is a test message'
+    }
+    resp = client.post(url, data)
+    assert resp.status_code == 200
+    assert FormSubmission.objects.count() == 0
 
-        self.emailform.store_submission = True
-        self.emailform.save()
-        resp = self.client.post(url, data)
-        self.assertEqual(resp.status_code, 200)
-        self.assertEqual(FormSubmission.objects.count(), 1)
+    emailform.store_submission = True
+    emailform.save()
+    resp = client.post(url, data)
+    assert resp.status_code == 200
+    assert FormSubmission.objects.count() == 1
