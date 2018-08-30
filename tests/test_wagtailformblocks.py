@@ -9,7 +9,7 @@ from __future__ import unicode_literals
 import json
 
 import pytest
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 from tests.factory.form import BaseFormFactory, EmailFormFactory
 from wagtailformblocks.models import FormField, FormSubmission

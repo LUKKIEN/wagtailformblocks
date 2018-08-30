@@ -10,10 +10,10 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.wagtailadmin.edit_handlers import (
+from wagtail.admin.edit_handlers import (
     FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel)
-from wagtail.wagtailadmin.utils import send_mail
-from wagtail.wagtailforms.models import AbstractFormField
+from wagtail.admin.utils import send_mail
+from wagtail.contrib.forms.models import AbstractFormField
 
 from .forms import FormBuilder
 from .utils.conf import recaptcha_enabled
