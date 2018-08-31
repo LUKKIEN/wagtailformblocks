@@ -14,3 +14,4 @@ Contributors
 * Rubén Colina
 * Mike Dingjan
 * Oktay Altay
+* Henk-Jan van Hasselaar

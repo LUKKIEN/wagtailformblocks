@@ -55,7 +55,7 @@ Add ``wagtailformblocks``, ``wagtail.wagtailforms`` and ``wagtail.contrib.modela
 
     INSTALLED_APPS += [
         'wagtailformblocks',
-        'wagtail.wagtailforms',
+        'wagtail.contrib.forms',
         'wagtail.contrib.modeladmin'
     ]
 

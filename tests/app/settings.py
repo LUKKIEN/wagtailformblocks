@@ -1,7 +1,7 @@
 import os
 import sys
 
-import wagtail.wagtailcore
+import wagtail.core
 
 
 def env(name, default=None):
@@ -18,13 +18,13 @@ INSTALLED_APPS = [
     'taggit',
     'modelcluster',
 
-    'wagtail.wagtailcore',
-    'wagtail.wagtailadmin',
-    'wagtail.wagtailusers',
-    'wagtail.wagtailsites',
-    'wagtail.wagtailforms',
-    'wagtail.wagtailimages',
-    'wagtail.wagtaildocs',
+    'wagtail.core',
+    'wagtail.admin',
+    'wagtail.users',
+    'wagtail.sites',
+    'wagtail.contrib.forms',
+    'wagtail.images',
+    'wagtail.documents',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -33,7 +33,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-wagtail_version = tuple(map(int, wagtail.wagtailcore.__version__.split('.')))
+wagtail_version = tuple(map(int, wagtail.core.__version__.split('.')))
 
 ROOT_URLCONF = 'tests.app.urls'
 
@@ -60,7 +60,7 @@ MIDDLEWARE_CLASSES = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 
-    'wagtail.wagtailcore.middleware.SiteMiddleware',
+    'wagtail.core.middleware.SiteMiddleware',
 ]
 
 TEMPLATES = [
