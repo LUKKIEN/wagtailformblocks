@@ -2,6 +2,11 @@
 CHANGELOG
 =========
 
+0.3.0 (31-08-2018)
+------------------
++ Added support for Wagtail 2.x
++ Dropped support for Wagtail 1.x
+
 0.2.0 (09-08-2017)
 ------------------
 + Dropped support for Wagtail 1.4, 1.5, 1.6, 1.7
