@@ -53,6 +53,7 @@ class BaseForm(ClusterableModel):
     panels = [
         FieldPanel('name',),
         FieldPanel('store_submission',),
+        FieldPanel('success_message'),
         InlinePanel('form_fields', label="Form fields"),
     ]
 
