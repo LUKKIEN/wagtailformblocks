@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.3.1 (03-10-2018)
+------------------
++ Added succes message field missing from the configuration
+
 0.3.0 (31-08-2018)
 ------------------
 + Added support for Wagtail 2.x
