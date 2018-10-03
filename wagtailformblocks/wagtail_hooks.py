@@ -41,6 +41,7 @@ class SubmissionAdmin(ModelAdmin):
     list_display = ('form_data', 'form', 'submit_time')
     list_filter = ('form', )
 
+
 form_admins.append(SubmissionAdmin)
 
 

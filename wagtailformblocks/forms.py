@@ -1,5 +1,4 @@
 from captcha.fields import ReCaptchaField
-from django.conf import settings
 from wagtail.contrib.forms.forms import FormBuilder as OrigFormBuilder
 
 from wagtailformblocks.utils.conf import (

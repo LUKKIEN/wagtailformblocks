@@ -1,11 +1,7 @@
-from __future__ import absolute_import, unicode_literals
-
 import json
 
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
-from django.utils import six
-from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
@@ -19,7 +15,6 @@ from .forms import FormBuilder
 from .utils.conf import recaptcha_enabled
 
 
-@python_2_unicode_compatible
 class FormSubmission(models.Model):
     """Data for a Form submission."""
 
@@ -42,7 +37,6 @@ class FormField(AbstractFormField):
     form = ParentalKey('BaseForm', related_name='form_fields')
 
 
-@python_2_unicode_compatible
 class BaseForm(ClusterableModel):
     name = models.CharField(max_length=255)
     store_submission = models.BooleanField(
@@ -92,6 +86,7 @@ class BaseForm(ClusterableModel):
 if recaptcha_enabled():
     BaseForm.panels.insert(2, FieldPanel('add_recaptcha'))
 
+
 class EmailForm(BaseForm):
     """
     A Form Page that sends email. Pages implementing a form to be send
@@ -134,7 +129,7 @@ class EmailForm(BaseForm):
             if name == 'recaptcha' or not data:
                 continue
             content.append(
-                field.label + ': ' + six.text_type(data))
+                field.label + ': ' + str(data))
 
         send_mail(
             self.subject, '\n'.join(content), addresses, self.from_address)

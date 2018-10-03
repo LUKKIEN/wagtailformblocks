@@ -1,5 +1,3 @@
-from __future__ import absolute_import, unicode_literals
-
 from django import forms
 from django.urls import reverse
 
@@ -44,7 +42,8 @@ class WagtailFormBlock(blocks.StructBlock):
         if not parent_context:
             context = super(WagtailFormBlock, self).get_context(value)
         else:
-            context = super(WagtailFormBlock, self).get_context(value, parent_context)
+            context = super(WagtailFormBlock, self).get_context(
+                value, parent_context)
 
         form = value['form']
 

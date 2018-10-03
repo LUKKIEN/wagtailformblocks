@@ -4,8 +4,6 @@ test_wagtailformblocks
 
 Tests for `wagtailformblocks` module.
 """
-from __future__ import unicode_literals
-
 import json
 
 import pytest
