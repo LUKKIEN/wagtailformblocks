@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.4.0 (XX-XX-XXXX)
+0.4.0 (18-07-2019)
 ------------------
 + Update support for Django Recaptcha to v2, dropped support for v1
 
