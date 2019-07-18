@@ -11,25 +11,22 @@ with open('CHANGELOG.rst') as changelog_file:
 
 install_requires = [
     'django-model-utils>=2.5.2',
-    'django-recaptcha>=1.1,<2.0',
+    'django-recaptcha>=2.0,<2.1',
     'wagtail>=2.0',
 ]
 
 test_require = [
-    # For coverage and PEP8 linting
-    'flake8>=2.2.0',
-    'isort>=4.2.0',
-    'tox>=2.3.1',
-    'cryptography==1.4',
-    'PyYAML==3.11',
-    'bumpversion==0.5.3',
-    'wheel==0.29.0',
-    'watchdog==0.8.3',
-    'pytest==3.2.0',
-    'pytest-cov==2.5.1',
-    'pytest-django==3.1.2',
-    'coverage==4.4.1',
-    'factory-boy==2.9.2',
+    # Required for test and coverage
+    'pytest',
+    'pytest-cov',
+    'pytest-django',
+    'pytest-pythonpath',
+    'coverage',
+    'factory-boy',
+    'tox',
+    # Linting
+    'flake8',
+    'isort',
 ]
 
 docs_require = [

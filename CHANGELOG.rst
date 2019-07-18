@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.4.0 (XX-XX-XXXX)
+------------------
++ Update support for Django Recaptcha to v2, dropped support for v1
+
 0.3.1 (03-10-2018)
 ------------------
 + Added succes message field missing from the configuration

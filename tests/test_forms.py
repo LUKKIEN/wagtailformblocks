@@ -24,4 +24,3 @@ class TestFormBuilder(TestCase):
 
         form = self.baseform.get_form()
         self.assertIn('recaptcha', form.fields)
-
