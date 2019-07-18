@@ -21,6 +21,6 @@ class FormBuilder(OrigFormBuilder):
 
         if self.recaptcha_enabled:
             recaptcha_attrs = get_formblocks_setting('RECAPTCHA_ATTRS')
-            formfields['recaptcha'] = ReCaptchaField(attrs=recaptcha_attrs)
+            formfields['recaptcha'] = ReCaptchaField(**recaptcha_attrs)
 
         return formfields
