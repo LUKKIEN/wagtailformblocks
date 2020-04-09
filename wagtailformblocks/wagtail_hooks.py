@@ -9,9 +9,10 @@ from .models import BaseForm, FormSubmission
 def _get_valid_subclasses(cls):
     clss = []
     for subcls in cls.__subclasses__():
-        if subcls._meta.abstract:
-            continue
-        clss.append(subcls)
+        if not getattr(subcls, 'wagtailformblocks_autoregister', True) or subcls._meta.abstract:
+            pass
+        else:
+            clss.append(subcls)
         sub_classes = _get_valid_subclasses(subcls)
         if sub_classes:
             clss.extend(sub_classes)
@@ -23,12 +24,10 @@ form_admins = []
 
 for cls in all_classes:
     object_name = cls._meta.object_name
-
     admin_name = "{}Admin".format(object_name)
     admin_defs = {
         'model': cls,
         'menu_label': cls._meta.verbose_name,
-        # 'menu_order': 100,
         'menu_icon': 'icon icon-form',
     }
     admin_class = type(admin_name, (ModelAdmin, ), admin_defs)
