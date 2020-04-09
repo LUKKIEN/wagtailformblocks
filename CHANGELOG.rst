@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.5.0 (XX-XX-XXXX)
+0.5.0 (09-04-2020)
 ------------------
 + Add property `wagtailformblocks_autoregister` to skip automatic registration
 
