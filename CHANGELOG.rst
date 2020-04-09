@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.5.0 (XX-XX-XXXX)
+------------------
++ Add property `wagtailformblocks_autoregister` to skip automatic registration
+
 0.4.0 (18-07-2019)
 ------------------
 + Update support for Django Recaptcha to v2, dropped support for v1
