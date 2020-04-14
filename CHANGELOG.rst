@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.5.1 (14-04-2020)
+------------------
++ Add changelog to manifest which started throwing error
+
 0.5.0 (09-04-2020)
 ------------------
 + Add property `wagtailformblocks_autoregister` to skip automatic registration
