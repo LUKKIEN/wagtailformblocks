@@ -6,8 +6,6 @@ dist: xenial
 matrix:
   include:
     # Wagtail 2.3 LTS to cover support until 2.7
-    - env: TOXENV=dj20-wagtail23-py34
-      python: 3.4
     - env: TOXENV=dj20-wagtail23-py35
       python: 3.5
     - env: TOXENV=dj20-wagtail23-py36
