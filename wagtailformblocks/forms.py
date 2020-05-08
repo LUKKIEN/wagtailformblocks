@@ -1,8 +1,8 @@
 from captcha.fields import ReCaptchaField
 from wagtail.contrib.forms.forms import FormBuilder as OrigFormBuilder
 
-from wagtailformblocks.utils.conf import (
-    get_formblocks_setting, recaptcha_enabled)
+from wagtailformblocks.utils.conf import (get_formblocks_setting,
+                                          recaptcha_enabled)
 
 
 class FormBuilder(OrigFormBuilder):

@@ -1,7 +1,6 @@
 from django.utils.translation import ugettext_lazy as _
-
-from wagtail.contrib.modeladmin.options import (
-    ModelAdmin, ModelAdminGroup, modeladmin_register)
+from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
+                                                modeladmin_register)
 
 from .models import BaseForm, FormSubmission
 

@@ -6,22 +6,26 @@ from django.utils.translation import ugettext_lazy as _
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import (
-    FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel)
-from wagtail.admin.utils import send_mail
+from wagtail import VERSION as WAGTAIL_VERSION
+from wagtail.admin.edit_handlers import (FieldPanel, FieldRowPanel,
+                                         InlinePanel, MultiFieldPanel)
 from wagtail.contrib.forms.models import AbstractFormField
 
 from .forms import FormBuilder
 from .utils.conf import recaptcha_enabled
+
+if WAGTAIL_VERSION < (2, 9):
+    from wagtail.admin.utils import send_mail
+else:
+    from wagtail.admin.mail import send_mail
 
 
 class FormSubmission(models.Model):
     """Data for a Form submission."""
 
     form_data = models.TextField()
-    form = models.ForeignKey('BaseForm', on_delete=models.CASCADE)
-    submit_time = models.DateTimeField(
-        verbose_name=_('submit time'), auto_now_add=True)
+    form = models.ForeignKey("BaseForm", on_delete=models.CASCADE)
+    submit_time = models.DateTimeField(verbose_name=_("submit time"), auto_now_add=True)
 
     def get_data(self):
         return json.loads(self.form_data)
@@ -30,31 +34,36 @@ class FormSubmission(models.Model):
         return self.form_data
 
     class Meta:
-        verbose_name = _('form submission')
+        verbose_name = _("form submission")
 
 
 class FormField(AbstractFormField):
-    form = ParentalKey('BaseForm', related_name='form_fields')
+    form = ParentalKey("BaseForm", related_name="form_fields")
 
 
 class BaseForm(ClusterableModel):
     name = models.CharField(max_length=255)
     store_submission = models.BooleanField(
         default=False,
-        help_text=_('Store all form submissions in the database. This has to comply with local privacy laws.') # NOQA
+        help_text=_(
+            "Store all form submissions in the database. This has to comply with local privacy laws."
+        ),
     )
     add_recaptcha = models.BooleanField(
-        default=False, help_text=_("Add a reCapcha field to the form."))
+        default=False, help_text=_("Add a reCapcha field to the form.")
+    )
     success_message = models.CharField(
         blank=True,
         max_length=255,
-        help_text=_('An optional success message to show when the form has been succesfully submitted') # NOQA
+        help_text=_(
+            "An optional success message to show when the form has been succesfully submitted"
+        ),
     )
     panels = [
-        FieldPanel('name',),
-        FieldPanel('store_submission',),
-        FieldPanel('success_message'),
-        InlinePanel('form_fields', label="Form fields"),
+        FieldPanel("name",),
+        FieldPanel("store_submission",),
+        FieldPanel("success_message"),
+        InlinePanel("form_fields", label="Form fields"),
     ]
 
     objects = InheritanceManager()
@@ -63,8 +72,7 @@ class BaseForm(ClusterableModel):
         return self.name
 
     def get_form_class(self):
-        fb = FormBuilder(
-            self.form_fields.all(), add_recaptcha=self.add_recaptcha)
+        fb = FormBuilder(self.form_fields.all(), add_recaptcha=self.add_recaptcha)
         return fb.get_form_class()
 
     def get_form_parameters(self):
@@ -81,11 +89,12 @@ class BaseForm(ClusterableModel):
         if self.store_submission:
             return FormSubmission.objects.create(
                 form_data=json.dumps(form.cleaned_data, cls=DjangoJSONEncoder),
-                form=self)
+                form=self,
+            )
 
 
 if recaptcha_enabled():
-    BaseForm.panels.insert(2, FieldPanel('add_recaptcha'))
+    BaseForm.panels.insert(2, FieldPanel("add_recaptcha"))
 
 
 class EmailForm(BaseForm):
@@ -95,25 +104,34 @@ class EmailForm(BaseForm):
     """
 
     to_address = models.CharField(
-        verbose_name=_('to address'), max_length=255, blank=True,
-        help_text=_("Optional - form submissions will be emailed to these addresses. Separate multiple addresses by comma.") # NOQA
+        verbose_name=_("to address"),
+        max_length=255,
+        blank=True,
+        help_text=_(
+            "Optional - form submissions will be emailed to these addresses. Separate multiple addresses by comma."
+        ),
     )
     from_address = models.CharField(
-        verbose_name=_('from address'), max_length=255, blank=True)
-    subject = models.CharField(
-        verbose_name=_('subject'), max_length=255, blank=True)
+        verbose_name=_("from address"), max_length=255, blank=True
+    )
+    subject = models.CharField(verbose_name=_("subject"), max_length=255, blank=True)
 
     class Meta:
-        verbose_name = _('Email form')
+        verbose_name = _("Email form")
 
     panels = BaseForm.panels + [
-        MultiFieldPanel([
-            FieldRowPanel([
-                FieldPanel('from_address', classname="col6"),
-                FieldPanel('to_address', classname="col6"),
-            ]),
-            FieldPanel('subject'),
-        ], "Email"),
+        MultiFieldPanel(
+            [
+                FieldRowPanel(
+                    [
+                        FieldPanel("from_address", classname="col6"),
+                        FieldPanel("to_address", classname="col6"),
+                    ]
+                ),
+                FieldPanel("subject"),
+            ],
+            "Email",
+        ),
     ]
 
     def process_form_submission(self, form):
@@ -123,14 +141,12 @@ class EmailForm(BaseForm):
             self.send_form_mail(form)
 
     def send_form_mail(self, form):
-        addresses = [x.strip() for x in self.to_address.split(',')]
+        addresses = [x.strip() for x in self.to_address.split(",")]
         content = []
         for name, field in form.fields.items():
             data = form.cleaned_data.get(name)
-            if name == 'recaptcha' or not data:
+            if name == "recaptcha" or not data:
                 continue
-            content.append(
-                field.label + ': ' + str(data))
+            content.append(field.label + ": " + str(data))
 
-        send_mail(
-            self.subject, '\n'.join(content), addresses, self.from_address)
+        send_mail(self.subject, "\n".join(content), addresses, self.from_address)

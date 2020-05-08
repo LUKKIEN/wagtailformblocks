@@ -1,6 +1,5 @@
 from django import forms
 from django.urls import reverse
-
 from wagtail.core import blocks
 
 from .models import BaseForm

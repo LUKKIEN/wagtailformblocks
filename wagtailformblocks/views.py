@@ -14,7 +14,7 @@ class FormProcessView(View):
             formdef = BaseForm.objects.get_subclass(id=pk)
         except BaseForm.DoesNotExist:
             err = {
-                'message': str(get_formblocks_setting('ERROR_MSG')), # NOQA
+                'message': str(get_formblocks_setting('ERROR_MSG')),
                 'detail': 'Could not find WagtailForm with id {}'.format(pk)
             }
             return JsonResponse(err, status=400)
@@ -25,7 +25,7 @@ class FormProcessView(View):
             formdef.process_form_submission(form)
         else:
             err = {
-                'message': str(get_formblocks_setting('ERROR_MSG')),  # NOQA
+                'message': str(get_formblocks_setting('ERROR_MSG')),
                 'detail': form.errors
             }
             return JsonResponse(err, status=400)

@@ -5,81 +5,77 @@ dist: xenial
 
 matrix:
   include:
-    # Django 1.11
-    # Wagtail 2.0
-    - env: TOXENV=py35-dj111-wt2
+    # Wagtail 2.3 LTS to cover support until 2.7
+    - env: TOXENV=dj20-wagtail23-py35
       python: 3.5
-    - env: TOXENV=py36-dj111-wt2
+    - env: TOXENV=dj20-wagtail23-py36
+      python: 3.6
+    - env: TOXENV=dj21-wagtail23-py35
+      python: 3.5
+    - env: TOXENV=dj21-wagtail23-py36
       python: 3.6
 
-    # Django 2.1
-    # Wagtail 2.4
-    - env: TOXENV=py35-dj21-wt24
+    # Wagtail 2.7 LTS
+    - env: TOXENV=dj20-wagtail27-py35
       python: 3.5
-    - env: TOXENV=py36-dj21-wt24
+    - env: TOXENV=dj20-wagtail27-py36
       python: 3.6
-    - env: TOXENV=py37-dj21-wt24
+    - env: TOXENV=dj20-wagtail27-py37
       python: 3.7
+    - env: TOXENV=dj20-wagtail27-py38
+      python: 3.8
+    - env: TOXENV=dj21-wagtail27-py35
+      python: 3.5
+    - env: TOXENV=dj21-wagtail27-py36
+      python: 3.6
+    - env: TOXENV=dj21-wagtail27-py37
+      python: 3.7
+    - env: TOXENV=dj21-wagtail27-py38
+      python: 3.8
+    - env: TOXENV=dj22-wagtail27-py35
+      python: 3.5
+    - env: TOXENV=dj22-wagtail27-py36
+      python: 3.6
+    - env: TOXENV=dj22-wagtail27-py37
+      python: 3.7
+    - env: TOXENV=dj22-wagtail27-py38
+      python: 3.8
 
-    # Django 2.2
-    # Wagtail 2.4
-    - env: TOXENV=py35-dj22-wt24
+    # Wagtail 2.8
+    - env: TOXENV=dj21-wagtail28-py35
       python: 3.5
-    - env: TOXENV=py36-dj22-wt24
+    - env: TOXENV=dj21-wagtail28-py36
       python: 3.6
-    - env: TOXENV=py37-dj22-wt24
+    - env: TOXENV=dj21-wagtail28-py37
       python: 3.7
+    - env: TOXENV=dj21-wagtail28-py38
+      python: 3.8
+    - env: TOXENV=dj22-wagtail28-py35
+      python: 3.5
+    - env: TOXENV=dj22-wagtail28-py36
+      python: 3.6
+    - env: TOXENV=dj22-wagtail28-py37
+      python: 3.7
+    - env: TOXENV=dj22-wagtail28-py38
+      python: 3.8
+    - env: TOXENV=dj30-wagtail28-py36
+      python: 3.6
+    - env: TOXENV=dj30-wagtail28-py37
+      python: 3.7
+    - env: TOXENV=dj30-wagtail28-py38
+      python: 3.8
 
-    # Django 2.1
-    # Wagtail 2.5
-    - env: TOXENV=py35-dj21-wt25
-      python: 3.5
-    - env: TOXENV=py36-dj21-wt25
+    # Wagtail 2.9
+    - env: TOXENV=dj30-wagtail29-py36
       python: 3.6
-    - env: TOXENV=py37-dj21-wt25
+    - env: TOXENV=dj30-wagtail29-py37
       python: 3.7
-
-    # Django 2.2
-    # Wagtail 2.5
-    - env: TOXENV=py35-dj22-wt25
-      python: 3.5
-    - env: TOXENV=py36-dj22-wt25
-      python: 3.6
-    - env: TOXENV=py37-dj22-wt25
-      python: 3.7
-
-    # Django 2.1
-    # Wagtail 2.6
-    - env: TOXENV=py35-dj21-wt26
-      python: 3.5
-    - env: TOXENV=py36-dj21-wt26
-      python: 3.6
-    - env: TOXENV=py37-dj21-wt26
-      python: 3.7
-
-    # Django 2.2
-    # Wagtail 2.6
-    - env: TOXENV=py35-dj22-wt26
-      python: 3.5
-    - env: TOXENV=py36-dj22-wt26
-      python: 3.6
-    - env: TOXENV=py37-dj22-wt26
-      python: 3.7
-
-    # Django 2.2
-    # Wagtail 2.7
-    - env: TOXENV=py35-dj22-wt27
-      python: 3.5
-    - env: TOXENV=py36-dj22-wt27
-      python: 3.6
-    - env: TOXENV=py37-dj22-wt27
-      python: 3.7
-    - env: TOXENV=py38-dj22-wt27
+    - env: TOXENV=dj30-wagtail29-py38
       python: 3.8
 
     # Flake 8
     - env: TOXENV=flake8
-      python: 3.6
+      python: 3.8
 
 
 install:
