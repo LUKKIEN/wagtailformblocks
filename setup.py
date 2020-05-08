@@ -11,7 +11,7 @@ with open('CHANGELOG.rst') as changelog_file:
 
 install_requires = [
     'django-model-utils>=2.5.2',
-    'django-recaptcha>=2.0,<2.1',
+    'django-recaptcha>=2.0.6,<2.1',
     'wagtail>=2.0',
 ]
 
@@ -36,7 +36,7 @@ docs_require = [
 
 setup(
     name='wagtailformblocks',
-    version='0.5.1',
+    version='0.6.0',
     description="A Wagtail module that provides content blocks to display and process user defined forms", # NOQA
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
