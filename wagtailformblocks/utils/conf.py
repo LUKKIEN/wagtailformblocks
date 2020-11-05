@@ -1,5 +1,11 @@
+from django import VERSION as DJANGO_VERSION
 from django.conf import settings
-from django.utils.translation import ugettext_lazy as _
+
+if DJANGO_VERSION < (3, 0):
+    from django.utils.translation import ugettext_lazy as _
+else:
+    from django.utils.translation import gettext_lazy as _
+
 
 DEFAULTS = {
     'SUCCESS_MSG': _('Thank you, the form has been submitted.'),

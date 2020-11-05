@@ -52,7 +52,7 @@ flake8:
 	@flake8 wagtailformblocks/ tests/
 
 isort:
-	@isort --recursive wagtailformblocks/ tests/
+	@isort -rc wagtailformblocks/ tests/
 
 test: ## run tests quickly with the default Python
 	py.test tests/

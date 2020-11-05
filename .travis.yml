@@ -1,91 +1,62 @@
-sudo: false
 language: python
 cache: pip
 dist: xenial
 
+services:
+  - postgresql
+addons:
+    postgresql: "12"
+
 matrix:
   include:
-    # Wagtail 2.3 LTS to cover support until 2.7
-    - env: TOXENV=dj20-wagtail23-py35
-      python: 3.5
-    - env: TOXENV=dj20-wagtail23-py36
-      python: 3.6
-    - env: TOXENV=dj21-wagtail23-py35
-      python: 3.5
-    - env: TOXENV=dj21-wagtail23-py36
-      python: 3.6
-
     # Wagtail 2.7 LTS
-    - env: TOXENV=dj20-wagtail27-py35
+    - env: TOXENV=dj20-wt27-py35
       python: 3.5
-    - env: TOXENV=dj20-wagtail27-py36
+    - env: TOXENV=dj20-wt27-py36
       python: 3.6
-    - env: TOXENV=dj20-wagtail27-py37
+    - env: TOXENV=dj20-wt27-py37
       python: 3.7
-    - env: TOXENV=dj20-wagtail27-py38
-      python: 3.8
-    - env: TOXENV=dj21-wagtail27-py35
-      python: 3.5
-    - env: TOXENV=dj21-wagtail27-py36
-      python: 3.6
-    - env: TOXENV=dj21-wagtail27-py37
-      python: 3.7
-    - env: TOXENV=dj21-wagtail27-py38
-      python: 3.8
-    - env: TOXENV=dj22-wagtail27-py35
-      python: 3.5
-    - env: TOXENV=dj22-wagtail27-py36
-      python: 3.6
-    - env: TOXENV=dj22-wagtail27-py37
-      python: 3.7
-    - env: TOXENV=dj22-wagtail27-py38
+    - env: TOXENV=dj20-wt27-py38
       python: 3.8
 
-    # Wagtail 2.8
-    - env: TOXENV=dj21-wagtail28-py35
+    - env: TOXENV=dj21-wt27-py35
       python: 3.5
-    - env: TOXENV=dj21-wagtail28-py36
+    - env: TOXENV=dj21-wt27-py36
       python: 3.6
-    - env: TOXENV=dj21-wagtail28-py37
+    - env: TOXENV=dj21-wt27-py37
       python: 3.7
-    - env: TOXENV=dj21-wagtail28-py38
+    - env: TOXENV=dj21-wt27-py38
       python: 3.8
-    - env: TOXENV=dj22-wagtail28-py35
+
+    - env: TOXENV=dj22-wt27-py35
       python: 3.5
-    - env: TOXENV=dj22-wagtail28-py36
+    - env: TOXENV=dj22-wt27-py36
       python: 3.6
-    - env: TOXENV=dj22-wagtail28-py37
+    - env: TOXENV=dj22-wt27-py37
       python: 3.7
-    - env: TOXENV=dj22-wagtail28-py38
-      python: 3.8
-    - env: TOXENV=dj30-wagtail28-py36
-      python: 3.6
-    - env: TOXENV=dj30-wagtail28-py37
-      python: 3.7
-    - env: TOXENV=dj30-wagtail28-py38
+    - env: TOXENV=dj22-wt27-py38
       python: 3.8
 
-    # Wagtail 2.9
-    - env: TOXENV=dj30-wagtail29-py36
+    # Wagtail 2.11
+    - env: TOXENV=dj22-wt211-py36
       python: 3.6
-    - env: TOXENV=dj30-wagtail29-py37
+    - env: TOXENV=dj22-wt211-py37
       python: 3.7
-    - env: TOXENV=dj30-wagtail29-py38
+    - env: TOXENV=dj22-wt211-py38
       python: 3.8
 
-    # Wagtail 2.10
-    - env: TOXENV=dj30-wagtail210-py36
+    - env: TOXENV=dj30-wt211-py36
       python: 3.6
-    - env: TOXENV=dj30-wagtail210-py37
+    - env: TOXENV=dj30-wt211-py37
       python: 3.7
-    - env: TOXENV=dj30-wagtail210-py38
+    - env: TOXENV=dj30-wt211-py38
       python: 3.8
 
-    - env: TOXENV=dj31-wagtail210-py36
+    - env: TOXENV=dj31-wt211-py36
       python: 3.6
-    - env: TOXENV=dj31-wagtail210-py37
+    - env: TOXENV=dj31-wt211-py37
       python: 3.7
-    - env: TOXENV=dj31-wagtail210-py38
+    - env: TOXENV=dj31-wt211-py38
       python: 3.8
 
     # Flake 8

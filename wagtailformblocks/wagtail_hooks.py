@@ -1,8 +1,13 @@
-from django.utils.translation import ugettext_lazy as _
+from django import VERSION as DJANGO_VERSION
 from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
                                                 modeladmin_register)
 
 from .models import BaseForm, FormSubmission
+
+if DJANGO_VERSION < (3, 0):
+    from django.utils.translation import ugettext_lazy as _
+else:
+    from django.utils.translation import gettext_lazy as _
 
 
 def _get_valid_subclasses(cls):
