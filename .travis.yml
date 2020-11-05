@@ -73,6 +73,21 @@ matrix:
     - env: TOXENV=dj30-wagtail29-py38
       python: 3.8
 
+    # Wagtail 2.10
+    - env: TOXENV=dj30-wagtail210-py36
+      python: 3.6
+    - env: TOXENV=dj30-wagtail210-py37
+      python: 3.7
+    - env: TOXENV=dj30-wagtail210-py38
+      python: 3.8
+
+    - env: TOXENV=dj31-wagtail210-py36
+      python: 3.6
+    - env: TOXENV=dj31-wagtail210-py37
+      python: 3.7
+    - env: TOXENV=dj31-wagtail210-py38
+      python: 3.8
+
     # Flake 8
     - env: TOXENV=flake8
       python: 3.8
