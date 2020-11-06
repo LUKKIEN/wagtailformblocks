@@ -97,6 +97,13 @@ jobs:
           - toxenv: dj31-wt211-py38
             python-version: 3.8
 
+    services:
+      postgres:
+        image: postgres:10.8
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
     steps:
       - uses: actions/checkout@v1
 
@@ -114,4 +121,7 @@ jobs:
         run: |
             tox
         env:
+          DATABASE_HOST: localhost
+          DATABASE_USER: postgres
+          DATABASE_PASS: postgres
           TOXENV: ${{ matrix.toxenv }}
