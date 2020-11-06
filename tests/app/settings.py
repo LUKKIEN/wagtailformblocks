@@ -1,19 +1,9 @@
 import os
-import sys
 
-import wagtail.core
-
-
-def env(name, default=None):
-    if sys.version_info < (3,):
-        return os.environ.get(name, failobj=default)
-    else:
-        return os.environ.get(name, default=default)
-
+from wagtail import VERSION as WAGTAIL_VERSION
 
 INSTALLED_APPS = [
     'wagtailformblocks',
-    # 'tests.app',
 
     'taggit',
     'modelcluster',
@@ -29,18 +19,20 @@ INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
+    'django.contrib.messages',
     'django.contrib.sessions',
     'django.contrib.staticfiles',
 ]
-
-wagtail_version = tuple(map(int, wagtail.core.__version__.split('.')))
 
 ROOT_URLCONF = 'tests.app.urls'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': env('DATABASE_NAME', 'test.sqlite3'),
+        'ENGINE': os.getenv('DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'),
+        'NAME': os.getenv('DATABASE_NAME', 'wagtailformblocks'),
+        'HOST': os.getenv('DATABASE_HOST', ''),
+        'USER': os.getenv('DATABASE_USER', ''),
+        'PASSWORD': os.getenv('DATABASE_PASS', ''),
     },
 }
 SECRET_KEY = 'not so secret'
@@ -52,16 +44,18 @@ DEBUG = True
 USE_TZ = True
 TIME_ZONE = 'Europe/Amsterdam'
 
-MIDDLEWARE_CLASSES = [
+MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-
-    'wagtail.core.middleware.SiteMiddleware',
 ]
+
+if WAGTAIL_VERSION < (2, 9):
+    MIDDLEWARE += ['wagtail.core.middleware.SiteMiddleware']
+
 
 TEMPLATES = [
     {

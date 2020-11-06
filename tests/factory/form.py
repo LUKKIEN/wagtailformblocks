@@ -3,14 +3,14 @@ import factory
 from wagtailformblocks.models import BaseForm, EmailForm
 
 
-class BaseFormFactory(factory.DjangoModelFactory):
+class BaseFormFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = BaseForm
 
     name = 'BaseForm'
 
 
-class EmailFormFactory(factory.DjangoModelFactory):
+class EmailFormFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = EmailForm
 

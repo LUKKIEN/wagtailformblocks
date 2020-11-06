@@ -4,13 +4,18 @@ test_wagtailformblocks
 
 Tests for `wagtailformblocks` module.
 """
-import json
-
 import pytest
 from django.urls import reverse
+from wagtail import VERSION as WAGTAIL_VERSION
 
 from tests.factory.form import BaseFormFactory, EmailFormFactory
 from wagtailformblocks.models import FormField, FormSubmission
+
+
+def get_field_name(field_name):
+    if WAGTAIL_VERSION < (2, 10):
+        return field_name.replace('_', '-')
+    return field_name
 
 
 def make_formfields(form):
@@ -40,16 +45,6 @@ def make_formfields(form):
     )
 
 
-def get_json(response):
-    if hasattr(response, 'json'):  # Django >= 1.9
-        return response.json()
-    try:
-        return json.loads(response.content)
-    except TypeError:
-        # Happens when response.content is of type bytes (Python 3)
-        return json.loads(response.content.decode())
-
-
 @pytest.mark.django_db
 def test_process(client):
     baseform = BaseFormFactory()
@@ -60,8 +55,7 @@ def test_process(client):
     data = {}
     resp = client.post(url, data)
     assert resp.status_code == 200
-    json_resp = get_json(resp)
-    assert json_resp['message'] == 'Thank you, the form has been submitted.'
+    assert resp.json()['message'] == 'Thank you, the form has been submitted.'
 
 
 @pytest.mark.django_db
@@ -73,13 +67,11 @@ def test_process_form_validation(client):
     data = {}
     resp = client.post(url, data)
     assert resp.status_code == 400
-
-    json_resp = get_json(resp)
-    assert json_resp['message'] == 'There was an error processing the form'
+    assert resp.json()['message'] == 'There was an error processing the form'
 
     data = {
-        'your-email': 'john@doe.com',
-        'your-message': 'This is a test message'
+        get_field_name('your_email'): 'john@doe.com',
+        get_field_name('your_message'): 'This is a test message'
     }
     resp = client.post(url, data)
     assert resp.status_code == 200
@@ -92,8 +84,8 @@ def test_process_form_store_submission(client):
     url = reverse('wagtailformblocks_process',
                   kwargs={'pk': emailform.id})
     data = {
-        'your-email': 'john@doe.com',
-        'your-message': 'This is a test message'
+        get_field_name('your_email'): 'john@doe.com',
+        get_field_name('your_message'): 'This is a test message'
     }
     resp = client.post(url, data)
     assert resp.status_code == 200

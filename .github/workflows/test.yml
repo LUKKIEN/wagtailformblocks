@@ -1,0 +1,127 @@
+name: test
+
+on: [pull_request, push]
+
+jobs:
+
+  lint:
+    name: lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Run tox -e flake8
+        run: tox
+        env:
+          TOXENV: flake8
+
+  test:
+    name: unittests
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        toxenv:
+            - dj20-wt27-py35
+            - dj20-wt27-py36
+            - dj20-wt27-py37
+            - dj20-wt27-py38
+            - dj21-wt27-py35
+            - dj21-wt27-py36
+            - dj21-wt27-py37
+            - dj21-wt27-py38
+            - dj22-wt27-py35
+            - dj22-wt27-py36
+            - dj22-wt27-py37
+            - dj22-wt27-py38
+            - dj22-wt211-py36
+            - dj22-wt211-py37
+            - dj22-wt211-py38
+            - dj30-wt211-py36
+            - dj30-wt211-py37
+            - dj30-wt211-py38
+            - dj31-wt211-py36
+            - dj31-wt211-py37
+            - dj31-wt211-py38
+        include:
+          - toxenv: dj20-wt27-py35
+            python-version: 3.5
+          - toxenv: dj20-wt27-py36
+            python-version: 3.6
+          - toxenv: dj20-wt27-py37
+            python-version: 3.7
+          - toxenv: dj20-wt27-py38
+            python-version: 3.8
+          - toxenv: dj21-wt27-py35
+            python-version: 3.5
+          - toxenv: dj21-wt27-py36
+            python-version: 3.6
+          - toxenv: dj21-wt27-py37
+            python-version: 3.7
+          - toxenv: dj21-wt27-py38
+            python-version: 3.8
+          - toxenv: dj22-wt27-py35
+            python-version: 3.5
+          - toxenv: dj22-wt27-py36
+            python-version: 3.6
+          - toxenv: dj22-wt27-py37
+            python-version: 3.7
+          - toxenv: dj22-wt27-py38
+            python-version: 3.8
+          - toxenv: dj22-wt211-py36
+            python-version: 3.6
+          - toxenv: dj22-wt211-py37
+            python-version: 3.7
+          - toxenv: dj22-wt211-py38
+            python-version: 3.8
+          - toxenv: dj30-wt211-py36
+            python-version: 3.6
+          - toxenv: dj30-wt211-py37
+            python-version: 3.7
+          - toxenv: dj30-wt211-py38
+            python-version: 3.8
+          - toxenv: dj31-wt211-py36
+            python-version: 3.6
+          - toxenv: dj31-wt211-py37
+            python-version: 3.7
+          - toxenv: dj31-wt211-py38
+            python-version: 3.8
+
+    services:
+      postgres:
+        image: postgres:10.8
+        ports:
+          - 5432:5432
+        options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install tox
+
+      - name: Run tox
+        run: |
+            tox
+        env:
+          DATABASE_HOST: localhost
+          DATABASE_USER: postgres
+          DATABASE_PASS: postgres
+          TOXENV: ${{ matrix.toxenv }}

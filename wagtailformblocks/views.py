@@ -20,7 +20,6 @@ class FormProcessView(View):
             return JsonResponse(err, status=400)
 
         form = formdef.get_form(request.POST)
-
         if form.is_valid():
             formdef.process_form_submission(form)
         else:
