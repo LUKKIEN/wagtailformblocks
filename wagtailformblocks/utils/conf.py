@@ -16,7 +16,7 @@ DEFAULTS = {
 
 def get_formblocks_setting(name):
     return getattr(
-        settings, 'WAGTAIL_FORMBLOCKS_'.format(name), DEFAULTS[name])
+        settings, 'WAGTAIL_FORMBLOCKS_{}'.format(name), DEFAULTS[name])
 
 
 def recaptcha_enabled():
