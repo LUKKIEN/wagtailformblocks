@@ -2,6 +2,12 @@
 CHANGELOG
 =========
 
+0.7.0 (06-11-2020)
+------------------
+
++ Added support up until Wagtail 2.11
++ Dropped support for Wagtail < 2.7
+
 0.6.0 (08-05-2020)
 ------------------
 + Added support for Wagtail 2.9
