@@ -6,6 +6,8 @@ services:
   - postgresql
 addons:
     postgresql: "12"
+before_script:
+  - psql -c 'create database wagtailformblocks;' -U postgres
 
 matrix:
   include:
