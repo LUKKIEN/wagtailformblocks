@@ -28,7 +28,7 @@ ROOT_URLCONF = 'tests.app.urls'
 
 DATABASES = {
     'default': {
-        'ENGINE': os.getenv('DATABASE_ENGINE' , 'django.db.backends.postgresql_psycopg2'),
+        'ENGINE': os.getenv('DATABASE_ENGINE', 'django.db.backends.postgresql_psycopg2'),
         'NAME': os.getenv('DATABASE_NAME', 'wagtailformblocks'),
         'HOST': os.getenv('DATABASE_HOST', ''),
         'USER': os.getenv('DATABASE_USER', ''),

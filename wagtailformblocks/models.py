@@ -6,7 +6,6 @@ from django.db import models
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail import VERSION as WAGTAIL_VERSION
 from wagtail.admin.edit_handlers import (FieldPanel, FieldRowPanel,
                                          InlinePanel, MultiFieldPanel)
 from wagtail.admin.mail import send_mail
