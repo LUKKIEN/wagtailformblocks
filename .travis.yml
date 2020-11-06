@@ -13,52 +13,52 @@ matrix:
     # Wagtail 2.7 LTS
     - env: TOXENV=dj20-wt27-py35
       python: 3.5
-    # - env: TOXENV=dj20-wt27-py36
-    #   python: 3.6
-    # - env: TOXENV=dj20-wt27-py37
-    #   python: 3.7
-    # - env: TOXENV=dj20-wt27-py38
-    #   python: 3.8
+    - env: TOXENV=dj20-wt27-py36
+      python: 3.6
+    - env: TOXENV=dj20-wt27-py37
+      python: 3.7
+    - env: TOXENV=dj20-wt27-py38
+      python: 3.8
 
-    # - env: TOXENV=dj21-wt27-py35
-    #   python: 3.5
-    # - env: TOXENV=dj21-wt27-py36
-    #   python: 3.6
-    # - env: TOXENV=dj21-wt27-py37
-    #   python: 3.7
-    # - env: TOXENV=dj21-wt27-py38
-    #   python: 3.8
+    - env: TOXENV=dj21-wt27-py35
+      python: 3.5
+    - env: TOXENV=dj21-wt27-py36
+      python: 3.6
+    - env: TOXENV=dj21-wt27-py37
+      python: 3.7
+    - env: TOXENV=dj21-wt27-py38
+      python: 3.8
 
-    # - env: TOXENV=dj22-wt27-py35
-    #   python: 3.5
-    # - env: TOXENV=dj22-wt27-py36
-    #   python: 3.6
-    # - env: TOXENV=dj22-wt27-py37
-    #   python: 3.7
-    # - env: TOXENV=dj22-wt27-py38
-    #   python: 3.8
+    - env: TOXENV=dj22-wt27-py35
+      python: 3.5
+    - env: TOXENV=dj22-wt27-py36
+      python: 3.6
+    - env: TOXENV=dj22-wt27-py37
+      python: 3.7
+    - env: TOXENV=dj22-wt27-py38
+      python: 3.8
 
-    # # Wagtail 2.11
-    # - env: TOXENV=dj22-wt211-py36
-    #   python: 3.6
-    # - env: TOXENV=dj22-wt211-py37
-    #   python: 3.7
-    # - env: TOXENV=dj22-wt211-py38
-    #   python: 3.8
+    # Wagtail 2.11
+    - env: TOXENV=dj22-wt211-py36
+      python: 3.6
+    - env: TOXENV=dj22-wt211-py37
+      python: 3.7
+    - env: TOXENV=dj22-wt211-py38
+      python: 3.8
 
-    # - env: TOXENV=dj30-wt211-py36
-    #   python: 3.6
-    # - env: TOXENV=dj30-wt211-py37
-    #   python: 3.7
-    # - env: TOXENV=dj30-wt211-py38
-    #   python: 3.8
+    - env: TOXENV=dj30-wt211-py36
+      python: 3.6
+    - env: TOXENV=dj30-wt211-py37
+      python: 3.7
+    - env: TOXENV=dj30-wt211-py38
+      python: 3.8
 
-    # - env: TOXENV=dj31-wt211-py36
-    #   python: 3.6
-    # - env: TOXENV=dj31-wt211-py37
-    #   python: 3.7
-    # - env: TOXENV=dj31-wt211-py38
-    #   python: 3.8
+    - env: TOXENV=dj31-wt211-py36
+      python: 3.6
+    - env: TOXENV=dj31-wt211-py37
+      python: 3.7
+    - env: TOXENV=dj31-wt211-py38
+      python: 3.8
 
     # Flake 8
     - env: TOXENV=flake8
