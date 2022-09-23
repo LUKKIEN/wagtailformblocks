@@ -1,7 +1,5 @@
 import os
 
-from wagtail import VERSION as WAGTAIL_VERSION
-
 INSTALLED_APPS = [
     'wagtailformblocks',
 
@@ -35,6 +33,7 @@ DATABASES = {
         'PASSWORD': os.getenv('DATABASE_PASS', ''),
     },
 }
+
 SECRET_KEY = 'not so secret'
 
 WAGTAIL_SITE_NAME = 'Wagtail Form Blocks'
@@ -52,10 +51,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
-
-if WAGTAIL_VERSION < (2, 9):
-    MIDDLEWARE += ['wagtail.core.middleware.SiteMiddleware']
-
 
 TEMPLATES = [
     {

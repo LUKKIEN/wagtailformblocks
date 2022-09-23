@@ -33,7 +33,7 @@ Example:
         ]
 
         def process_form_submission(self, form):
-            super(EmailForm, self).process_form_submission(form)
+            super().process_form_submission(form)
             if self.send_quotation:
                 # Do some extra stuff here
 

@@ -15,7 +15,7 @@ class FormProcessView(View):
         except BaseForm.DoesNotExist:
             err = {
                 'message': str(get_formblocks_setting('ERROR_MSG')),
-                'detail': 'Could not find WagtailForm with id {}'.format(pk)
+                'detail': 'Could not find WagtailForm with id {}'.format(pk),
             }
             return JsonResponse(err, status=400)
 
@@ -25,13 +25,11 @@ class FormProcessView(View):
         else:
             err = {
                 'message': str(get_formblocks_setting('ERROR_MSG')),
-                'detail': form.errors
+                'detail': form.errors,
             }
             return JsonResponse(err, status=400)
 
         resp = {
-            'message': formdef.success_message or str(
-                get_formblocks_setting('SUCCESS_MSG')
-            )
+            'message': formdef.success_message or str(get_formblocks_setting('SUCCESS_MSG'))
         }
         return JsonResponse(resp)

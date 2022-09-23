@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-# -*- coding: utf-8 -*-
 
 from setuptools import setup, find_packages
 
@@ -10,13 +9,14 @@ with open('CHANGELOG.rst') as changelog_file:
     changelog = changelog_file.read()
 
 install_requires = [
-    'django-model-utils>=2.5.2',
-    'django-recaptcha>=2.0.6,<2.1',
-    'wagtail>=2.7',
+    'django-model-utils>=4.2,<4.3',
+    'django-recaptcha>=3.0,<3.1',
+    'wagtail>=2.15,<4.1',
+    'django>=3.1,<4.2'
 ]
 
 test_require = [
-    'psycopg2-binary>=2.5.4',
+    'psycopg2-binary',
     # Required for test and coverage
     'pytest',
     'pytest-cov',
@@ -37,8 +37,8 @@ docs_require = [
 
 setup(
     name='wagtailformblocks',
-    version='0.7.0',
-    description="A Wagtail module that provides content blocks to display and process user defined forms", # NOQA
+    version='0.8.0',
+    description="A Wagtail module that provides content blocks to display and process user defined forms",
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
     author_email='info@leguijtict.nl',
@@ -55,10 +55,19 @@ setup(
         'License :: OSI Approved :: BSD License',
         'Natural Language :: English',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
+        'Programming Language :: Python :: 3.9',
+        'Programming Language :: Python :: 3.10',
+        'Framework :: Django',
+        'Framework :: Django :: 3.1',
+        'Framework :: Django :: 3.2',
+        'Framework :: Django :: 4.0',
+        'Framework :: Django :: 4.1',
+        'Framework :: Wagtail',
+        'Framework :: Wagtail :: 2.15',
+        'Framework :: Wagtail :: 2.16',
+        'Framework :: Wagtail :: 3',
+        'Framework :: Wagtail :: 4',
     ],
     extras_require={
         'testing': test_require,

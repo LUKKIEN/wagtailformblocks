@@ -1,23 +1,22 @@
 import json
 
-from django import VERSION as DJANGO_VERSION
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import (FieldPanel, FieldRowPanel,
-                                         InlinePanel, MultiFieldPanel)
+from wagtail.admin.edit_handlers import (
+    FieldPanel,
+    FieldRowPanel,
+    InlinePanel,
+    MultiFieldPanel,
+)
 from wagtail.admin.mail import send_mail
 from wagtail.contrib.forms.models import AbstractFormField
 
 from .forms import FormBuilder
 from .utils.conf import recaptcha_enabled
-
-if DJANGO_VERSION < (3, 0):
-    from django.utils.translation import ugettext_lazy as _
-else:
-    from django.utils.translation import gettext_lazy as _
 
 
 class FormSubmission(models.Model):
@@ -135,7 +134,7 @@ class EmailForm(BaseForm):
     ]
 
     def process_form_submission(self, form):
-        super(EmailForm, self).process_form_submission(form)
+        super().process_form_submission(form)
 
         if self.to_address:
             self.send_form_mail(form)
