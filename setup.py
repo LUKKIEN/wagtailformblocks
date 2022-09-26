@@ -11,8 +11,8 @@ with open('CHANGELOG.rst') as changelog_file:
 install_requires = [
     'django-model-utils>=4.2,<4.3',
     'django-recaptcha>=3.0,<3.1',
-    'wagtail>=2.15,<4.1',
-    'django>=3.1,<4.2'
+    'wagtail>=4.0,<4.1',
+    'django>=3.2,<4.2'
 ]
 
 test_require = [
@@ -59,14 +59,10 @@ setup(
         'Programming Language :: Python :: 3.9',
         'Programming Language :: Python :: 3.10',
         'Framework :: Django',
-        'Framework :: Django :: 3.1',
         'Framework :: Django :: 3.2',
         'Framework :: Django :: 4.0',
         'Framework :: Django :: 4.1',
         'Framework :: Wagtail',
-        'Framework :: Wagtail :: 2.15',
-        'Framework :: Wagtail :: 2.16',
-        'Framework :: Wagtail :: 3',
         'Framework :: Wagtail :: 4',
     ],
     extras_require={

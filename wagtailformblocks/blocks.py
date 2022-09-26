@@ -1,5 +1,5 @@
-from django import forms
 from django.urls import reverse
+from django.utils.functional import cached_property
 from wagtail.core import blocks
 
 from .models import BaseForm
@@ -7,12 +7,9 @@ from .models import BaseForm
 
 class FormChooserBlock(blocks.ChooserBlock):
     target_model = BaseForm
-    widget = forms.Select
 
     def value_for_form(self, value):
-        if isinstance(value, self.target_model):
-            return value.pk
-        return value
+        return value.pk if isinstance(value, self.target_model) else value
 
     def to_python(self, value):
         # the incoming serialised value should be None or an ID
@@ -26,12 +23,18 @@ class FormChooserBlock(blocks.ChooserBlock):
             except self.target_model.DoesNotExist:
                 return None
 
+    @cached_property
+    def widget(self):
+        from wagtailformblocks.widgets import FormChooserWidget
+
+        return FormChooserWidget()
+
 
 class WagtailFormBlock(blocks.StructBlock):
     form = FormChooserBlock()
 
     class Meta:
-        icon = 'icon icon-form'
+        icon = 'form'
         template = 'wagtailformblocks/form_block.html'
 
     def get_action_url(self, form):
@@ -45,7 +48,9 @@ class WagtailFormBlock(blocks.StructBlock):
 
         form = value['form']
 
-        context['form'] = form.get_form()
-        context['form_id'] = form.id
-        context['action_url'] = self.get_action_url(form)
-        return context
+        return {
+            'form': form.get_form(),
+            'form_id': form.id,
+            'action_url': self.get_action_url(form),
+            **context,
+        }

@@ -22,8 +22,7 @@ Example:
 
 
     class MyCustomForm(BaseForm):
-        send_quotation = models.BooleanField(verbose_name=_('send me a quotation'),
-                                             default=True)
+        send_quotation = models.BooleanField(verbose_name=_('send me a quotation'), default=True)
 
         class Meta:
             verbose_name = _('My custom form')
