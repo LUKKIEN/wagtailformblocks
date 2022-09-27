@@ -22,8 +22,7 @@ Example:
 
 
     class MyCustomForm(BaseForm):
-        send_quotation = models.BooleanField(verbose_name=_('send me a quotation'),
-                                             default=True)
+        send_quotation = models.BooleanField(verbose_name=_('send me a quotation'), default=True)
 
         class Meta:
             verbose_name = _('My custom form')
@@ -33,7 +32,7 @@ Example:
         ]
 
         def process_form_submission(self, form):
-            super(EmailForm, self).process_form_submission(form)
+            super().process_form_submission(form)
             if self.send_quotation:
                 # Do some extra stuff here
 

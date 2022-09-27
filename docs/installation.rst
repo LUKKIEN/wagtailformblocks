@@ -67,7 +67,7 @@ Add ``wagtailformblocks.url`` to your url config to enable the form processing v
 
     urlpatterns = [
         ...
-        url(r'^forms/', include(wagtailformblock_urls)),
+        path('forms/', include(wagtailformblock_urls)),
         ...
     ]
 

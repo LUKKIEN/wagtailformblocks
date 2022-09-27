@@ -1,18 +1,18 @@
-from django import VERSION as DJANGO_VERSION
-from wagtail.contrib.modeladmin.options import (ModelAdmin, ModelAdminGroup,
-                                                modeladmin_register)
+from django.utils.translation import gettext_lazy as _
+from wagtail import hooks
+from wagtail.contrib.modeladmin.options import (
+    ModelAdmin,
+    ModelAdminGroup,
+    modeladmin_register,
+)
 
+from .chooser import viewset
 from .models import BaseForm, FormSubmission
 
-if DJANGO_VERSION < (3, 0):
-    from django.utils.translation import ugettext_lazy as _
-else:
-    from django.utils.translation import gettext_lazy as _
 
-
-def _get_valid_subclasses(cls):
+def _get_valid_subclasses(klass):
     clss = []
-    for subcls in cls.__subclasses__():
+    for subcls in klass.__subclasses__():
         if not getattr(subcls, 'wagtailformblocks_autoregister', True) or subcls._meta.abstract:
             pass
         else:
@@ -32,7 +32,7 @@ for cls in all_classes:
     admin_defs = {
         'model': cls,
         'menu_label': cls._meta.verbose_name,
-        'menu_icon': 'icon icon-form',
+        'menu_icon': 'form',
     }
     admin_class = type(admin_name, (ModelAdmin, ), admin_defs)
     form_admins.append(admin_class)
@@ -40,7 +40,7 @@ for cls in all_classes:
 
 class SubmissionAdmin(ModelAdmin):
     model = FormSubmission
-    menu_icon = 'icon icon-table'
+    menu_icon = 'table'
     list_display = ('form_data', 'form', 'submit_time')
     list_filter = ('form', )
 
@@ -54,6 +54,11 @@ class FormGroup(ModelAdminGroup):
        todo: make the group so that we can add language to it
     """
     menu_label = _("User forms")
-    menu_icon = 'icon icon-form'
+    menu_icon = 'form'
     menu_order = 500
     items = form_admins
+
+
+@hooks.register("register_admin_viewset")
+def register_image_chooser_viewset():
+    return viewset

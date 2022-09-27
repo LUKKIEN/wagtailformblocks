@@ -1,8 +1,7 @@
-from django.conf.urls import url
+from django.urls import path
 
 from .views import FormProcessView
 
 urlpatterns = [
-    url(r'^submit/(?P<pk>\d+)/$', FormProcessView.as_view(),
-        name='wagtailformblocks_process'),
+    path('submit/<int:pk>/', FormProcessView.as_view(), name='wagtailformblocks_process'),
 ]

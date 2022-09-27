@@ -1,21 +1,8 @@
-"""
-test_wagtailformblocks
-----------------------------------
-
-Tests for `wagtailformblocks` module.
-"""
 import pytest
 from django.urls import reverse
-from wagtail import VERSION as WAGTAIL_VERSION
 
 from tests.factory.form import BaseFormFactory, EmailFormFactory
 from wagtailformblocks.models import FormField, FormSubmission
-
-
-def get_field_name(field_name):
-    if WAGTAIL_VERSION < (2, 10):
-        return field_name.replace('_', '-')
-    return field_name
 
 
 def make_formfields(form):
@@ -50,8 +37,7 @@ def test_process(client):
     baseform = BaseFormFactory()
     emailform = EmailFormFactory()
     make_formfields(emailform)
-    url = reverse('wagtailformblocks_process',
-                  kwargs={'pk': baseform.id})
+    url = reverse('wagtailformblocks_process', kwargs={'pk': baseform.id})
     data = {}
     resp = client.post(url, data)
     assert resp.status_code == 200
@@ -62,16 +48,15 @@ def test_process(client):
 def test_process_form_validation(client):
     emailform = EmailFormFactory()
     make_formfields(emailform)
-    url = reverse('wagtailformblocks_process',
-                  kwargs={'pk': emailform.id})
+    url = reverse('wagtailformblocks_process', kwargs={'pk': emailform.id})
     data = {}
     resp = client.post(url, data)
     assert resp.status_code == 400
     assert resp.json()['message'] == 'There was an error processing the form'
 
     data = {
-        get_field_name('your_email'): 'john@doe.com',
-        get_field_name('your_message'): 'This is a test message'
+        'your_email': 'john@doe.com',
+        'your_message': 'This is a test message'
     }
     resp = client.post(url, data)
     assert resp.status_code == 200
@@ -81,11 +66,10 @@ def test_process_form_validation(client):
 def test_process_form_store_submission(client):
     emailform = EmailFormFactory()
     make_formfields(emailform)
-    url = reverse('wagtailformblocks_process',
-                  kwargs={'pk': emailform.id})
+    url = reverse('wagtailformblocks_process', kwargs={'pk': emailform.id})
     data = {
-        get_field_name('your_email'): 'john@doe.com',
-        get_field_name('your_message'): 'This is a test message'
+        'your_email': 'john@doe.com',
+        'your_message': 'This is a test message'
     }
     resp = client.post(url, data)
     assert resp.status_code == 200

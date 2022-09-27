@@ -2,9 +2,15 @@
 CHANGELOG
 =========
 
+0.8.0 (next)
+------------------
++ Added support for Wagtail 4.0 and Wagtail 4.0 supported Django versions (3.2, 4.0, 4.1)
++ Added support for Python 3.9 and 3.10
++ Dropped support for Wagtail < 4.0
++ Dropped support for Python 3.6 and 3.7
+
 0.7.0 (06-11-2020)
 ------------------
-
 + Added support up until Wagtail 2.11
 + Dropped support for Wagtail < 2.7
 
