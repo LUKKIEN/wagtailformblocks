@@ -14,7 +14,7 @@ class FormChooserWidget(BaseChooser):
     icon = "form"
 
     def render_js_init(self, id_, name, value_data):
-        return "new FormChooserWidget({0});".format(json.dumps(id_))
+        return f"new FormChooserWidget({json.dumps(id_)});"
 
 
 register(BaseChooserAdapter(), FormChooserWidget)

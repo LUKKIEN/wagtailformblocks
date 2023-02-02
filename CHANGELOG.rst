@@ -2,6 +2,10 @@
 CHANGELOG
 =========
 
+0.9.0 (02-02-2023)
+------------------
++ Added support for Wagtail 4.1-LTS
+
 0.8.0 (27-09-2022)
 ------------------
 + Added support for Wagtail 4.0 and Wagtail 4.0 supported Django versions (3.2, 4.0, 4.1)
