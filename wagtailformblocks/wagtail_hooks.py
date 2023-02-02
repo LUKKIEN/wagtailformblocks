@@ -28,7 +28,7 @@ form_admins = []
 
 for cls in all_classes:
     object_name = cls._meta.object_name
-    admin_name = "{}Admin".format(object_name)
+    admin_name = f"{object_name}Admin"
     admin_defs = {
         'model': cls,
         'menu_label': cls._meta.verbose_name,
