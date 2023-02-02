@@ -9,10 +9,10 @@ with open('CHANGELOG.rst') as changelog_file:
     changelog = changelog_file.read()
 
 install_requires = [
-    'django-model-utils>=4.2,<4.3',
+    'django-model-utils>=4.2,<4.4',
     'django-recaptcha>=3.0,<3.1',
-    'wagtail>=4.0,<4.1',
-    'django>=3.2,<4.2'
+    'wagtail>=4.0,<4.3',
+    'django>=3.2,<5'
 ]
 
 test_require = [
