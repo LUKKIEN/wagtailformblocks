@@ -31,38 +31,47 @@ jobs:
 
     strategy:
       matrix:
-        toxenv:
-          - py38-dj32-wt4
-          - py38-dj4-wt4
-          - py38-dj41-wt4
-          - py39-dj32-wt4
-          - py39-dj4-wt4
-          - py39-dj41-wt4
-          - py310-dj32-wt4
-          - py310-dj4-wt4
-          - py310-dj41-wt4
         include:
-          - toxenv: py38-dj32-wt4
+          - toxenv: py38-dj32-wt40
             python-version: 3.8
-          - toxenv: py38-dj4-wt4
+          - toxenv: py38-dj32-wt41
             python-version: 3.8
-          - toxenv: py38-dj41-wt4
+          - toxenv: py38-dj40-wt40
+            python-version: 3.8
+          - toxenv: py38-dj40-wt41
+            python-version: 3.8
+          - toxenv: py38-dj41-wt40
+            python-version: 3.8
+          - toxenv: py38-dj41-wt41
             python-version: 3.8
 
-          - toxenv: py39-dj32-wt4
+          - toxenv: py39-dj32-wt40
             python-version: 3.9
-          - toxenv: py39-dj4-wt4
+          - toxenv: py39-dj32-wt41
             python-version: 3.9
-          - toxenv: py39-dj41-wt4
+          - toxenv: py39-dj40-wt40
+            python-version: 3.9
+          - toxenv: py39-dj40-wt41
+            python-version: 3.9
+          - toxenv: py39-dj41-wt40
+            python-version: 3.9
+          - toxenv: py39-dj41-wt41
             python-version: 3.9
 
-          - toxenv: py310-dj32-wt4
+          - toxenv: py310-dj32-wt40
             python-version: '3.10'
-          - toxenv: py310-dj4-wt4
+          - toxenv: py310-dj32-wt41
             python-version: '3.10'
-          - toxenv: py310-dj41-wt4
+          - toxenv: py310-dj40-wt40
             python-version: '3.10'
-
+          - toxenv: py310-dj40-wt41
+            python-version: '3.10'
+          - toxenv: py310-dj41-wt40
+            python-version: '3.10'
+          - toxenv: py310-dj41-wt41
+            python-version: '3.10'
+          - toxenv: py310-dj41-wt42
+            python-version: '3.10'
 
     services:
       postgres:
