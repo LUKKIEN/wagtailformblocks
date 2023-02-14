@@ -37,7 +37,7 @@ docs_require = [
 
 setup(
     name='wagtailformblocks',
-    version='0.8.0',
+    version='0.9.0',
     description="A Wagtail module that provides content blocks to display and process user defined forms",
     long_description=readme + '\n\n' + changelog,
     author="Tim Leguijt",
