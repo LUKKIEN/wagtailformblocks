@@ -6,13 +6,8 @@ from django.utils.translation import gettext_lazy as _
 from model_utils.managers import InheritanceManager
 from modelcluster.fields import ParentalKey
 from modelcluster.models import ClusterableModel
-from wagtail.admin.edit_handlers import (
-    FieldPanel,
-    FieldRowPanel,
-    InlinePanel,
-    MultiFieldPanel,
-)
 from wagtail.admin.mail import send_mail
+from wagtail.admin.panels import FieldPanel, FieldRowPanel, InlinePanel, MultiFieldPanel
 from wagtail.contrib.forms.models import AbstractFormField
 
 from .forms import FormBuilder
