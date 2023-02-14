@@ -2,7 +2,7 @@
 CHANGELOG
 =========
 
-0.9.0 (in git)
+0.9.0 (24-02-2023)
 ------------------
 + Added support for Wagtail 4.1-LTS and 4.2
 
