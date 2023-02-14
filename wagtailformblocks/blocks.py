@@ -1,6 +1,6 @@
 from django.urls import reverse
 from django.utils.functional import cached_property
-from wagtail.core import blocks
+from wagtail import blocks
 
 from .models import BaseForm
 
