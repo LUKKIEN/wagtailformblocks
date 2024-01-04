@@ -11,12 +11,12 @@ with open('CHANGELOG.rst') as changelog_file:
 install_requires = [
     'django-model-utils>=4.2,<4.4',
     'django-recaptcha>=3.0,<3.1',
-    'wagtail>=4.0,<4.3',
-    'django>=3.2,<5'
+    'wagtail>=4.0,<5.3',
+    'django>=3.2,<6'
 ]
 
 test_require = [
-    'psycopg2-binary',
+    'psycopg2',
     # Required for test and coverage
     'pytest',
     'pytest-cov',
