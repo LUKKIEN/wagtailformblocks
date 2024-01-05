@@ -2,6 +2,12 @@
 CHANGELOG
 =========
 
+0.10.0 (05-01-2024)
+------------------
++ Added support for Wagtail 5.0, 5.1 and 5.2-LTS
++ Added support for Python 3.11
++ Dropped support for Wagtail < 4.2
+
 0.9.0 (24-02-2023)
 ------------------
 + Added support for Wagtail 4.1-LTS and 4.2
