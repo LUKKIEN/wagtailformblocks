@@ -11,8 +11,20 @@ class FormChooserBlock(blocks.ChooserBlock):
     def value_for_form(self, value):
         return value.pk if isinstance(value, self.target_model) else value
 
+    def bulk_to_python(self, values):
+        """
+        Return the model instances for the given list of primary keys.
+        The instances must be returned in the same order as the values and keep None values.
+        """
+
+        if hasattr(self.target_model.objects, 'get_subclass'):
+            return [self.target_model.objects.get_subclass(pk=pk) for pk in values]
+
+        objects = self.target_model.objects.in_bulk(values)
+        return [objects.get(id) for id in values]
+
     def to_python(self, value):
-        # the incoming serialised value should be None or an ID
+        # The incoming serialised value should be None or an ID
         if value is None:
             return value
         else:
