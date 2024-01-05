@@ -10,7 +10,7 @@ class FormChooserBlock(blocks.ChooserBlock):
 
     def value_for_form(self, value):
         return value.pk if isinstance(value, self.target_model) else value
-    
+
     def bulk_to_python(self, values):
         """
         Return the model instances for the given list of primary keys.
